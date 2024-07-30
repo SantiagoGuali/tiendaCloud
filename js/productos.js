@@ -1,4 +1,4 @@
-const ip = "http://localhost:3001/api/";
+const ip = "http://35.175.185.255:3001/api/";
 const api = "productos"
 document.addEventListener('DOMContentLoaded', () => {
     validacion();
@@ -21,13 +21,13 @@ function validacion() {
 async function loadOptions() {
     try {
         // Cargar proveedores
-        const proveedoresResponse = await fetch(ip+api);
+        const proveedoresResponse = await fetch(ip+"proveedores");
         const proveedores = await proveedoresResponse.json();
         const proveedorSelect = document.getElementById('id_proveedor');
         proveedores.forEach(proveedor => {
             const option = document.createElement('option');
             option.value = proveedor.id_proveedor;
-            option.textContent = `Proveedor #${proveedor.id_proveedor}`;
+            option.textContent = `Proveedor #${proveedor.nombre}`;
             proveedorSelect.appendChild(option);
         });
         
@@ -81,7 +81,7 @@ async function handleFormSubmit(event) {
     const id_proveedor = parseInt(document.getElementById('id_proveedor').value, 10);
 
     try {
-        const response = await fetch('http://localhost:3001/api/productos', {
+        const response = await fetch(ip+api, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,4 +1,4 @@
-const ip = "http://localhost:3001/api/";
+const ip = "http://35.175.185.255:3001/api/";
 const api = "proveedores"
 document.addEventListener('DOMContentLoaded', () => {
     validacion();
@@ -37,7 +37,7 @@ async function customersTable() {
         customers.forEach(customer => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${customer.id}</td>
+                <td>${customer.id_proveedor}</td>
                 <td>${customer.nombre}</td>
                 <td>${customer.contacto}</td>
                 <td>${customer.telefono}</td>
@@ -53,7 +53,7 @@ async function customersTable() {
 
         $('#customerTable').DataTable();
     } catch (error) {
-        console.error('Error al obtener clientes:', error);
+        console.error('Error al obtener proveedores:', error);
     }
 }
 
@@ -77,10 +77,10 @@ async function handleFormSubmit(event) {
         const result = await response.json();
 
         if (response.ok) {
-            alert("Cliente agregado");
+            alert("Proveedor agregado");
             customersTable();
         } else {
-            alert("Error al agregar cliente: " + result.error);
+            alert("Error al agregar Proveedor: " + result.error);
         }
     } catch (error) {
         document.getElementById('responseMessage').textContent = 'Error: ' + error.message;

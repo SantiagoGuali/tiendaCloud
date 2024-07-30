@@ -1,5 +1,5 @@
-const ip = "http://localhost:3001/api/";
-const api = "productos"
+const ip = "http://35.175.185.255:3001/api/";
+const api = "detalle_facturas"
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +27,7 @@ const api = "productos"
         async function loadOptions() {
             try {
                 // Cargar productos
-                const productosResponse = await fetch(ip+api);
+                const productosResponse = await fetch(ip+"productos");
                 const productos = await productosResponse.json();
                 const productoSelect = document.getElementById('id_producto');
                 productos.forEach(producto => {
@@ -38,13 +38,13 @@ const api = "productos"
                 });
 
                 // Cargar facturas
-                const facturasResponse = await fetch(ip+api);
+                const facturasResponse = await fetch(ip+"facturas");
                 const facturas = await facturasResponse.json();
                 const facturaSelect = document.getElementById('id_factura');
                 facturas.forEach(factura => {
                     const option = document.createElement('option');
                     option.value = factura.id_factura;
-                    option.textContent = `Factura #${factura.id_factura}`;
+                    option.textContent = `Factura #${factura.codigo}`;
                     facturaSelect.appendChild(option);
                 });
 
@@ -57,7 +57,7 @@ const api = "productos"
 
         async function detalleFacturaTable() {
             try {
-                const response = await fetch('http://localhost:3001/api/detalle_facturas');
+                const response = await fetch(ip+api);
                 const detalles = await response.json();
                 const detalleFacturaTableBody = document.getElementById('detalleFacturaTable').querySelector('tbody');
 
@@ -94,7 +94,7 @@ const api = "productos"
             const id_factura = parseInt(document.getElementById('id_factura').value, 10);
 
             try {
-                const response = await fetch('http://localhost:3001/api/detalle_facturas', {
+                const response = await fetch(ip+api, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

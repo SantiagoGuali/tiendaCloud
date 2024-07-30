@@ -1,4 +1,4 @@
-const ip = "http://localhost:3001/api/";
+const ip = "http://35.175.185.255:3001/api/";
 const api = "facturas"
 document.addEventListener('DOMContentLoaded', () => {
     validacion();
